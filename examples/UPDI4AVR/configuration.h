@@ -30,7 +30,7 @@
  * *********************/
 
 /* MAKE signal input PF6/RESET or other PIN */
-#define ENABLE_MAKE_SIGNAL_OVER_RESET
+// #define ENABLE_MAKE_SIGNAL_OVER_RESET
 
 /**************************
  * DEBUG mode using USART *
