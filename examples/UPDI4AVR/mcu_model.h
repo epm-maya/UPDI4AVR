@@ -102,6 +102,11 @@
   )
   #define __AVR_MEGA_TINY__
   #define __AVR_TINY_2X__
+#elif defined(__AVR_AVR64DD14__) || defined(ARDUINO_AVR_AVR16DD14)
+  #define __AVR_DX__
+  #define __AVR_DB__
+  #define __AVR_DD__
+  #define __AVR_DD_SHRINK__
 #else
   #assert This MCU family is not supported
   #include BUILD_STOP

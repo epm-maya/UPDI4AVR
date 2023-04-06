@@ -139,13 +139,77 @@
 
 #endif  /* defined(BOARD_ZTINYAVR_2X) */
 
+#if defined(BOARD_AVRDX) && defined(__AVR_DD_SHRINK__)
+
+  /***
+   * AVR64DD14
+   *
+   * Using PORTA PORTC PORTD
+   *
+   *  JTRX : PA1  <-- Onboard CH340N TX / target MCU TX
+   *  JTTX : PA0  --> Onboard CH340N RX / target MCU RX
+   *  TRST : PD5  --> Target /RESET control (optional)
+   *  TDAT : PD6  <-> UPDI to target MCU            : one-wire transfer/receiver
+   *  PGEN : PD7  --> Programing state              : LOW:Deactive, HIGH:Active
+   *  MAKE : PD4  <-- Reset client signal (altanate): LOW:Active, HIGH:Deactive (user switch)
+   *  HVEN : PC3  --> HV output state               : LOW:Disable, HIGH:Enable
+   *  HVP1 : PC1  --> Charge pump drive 1 (optional)
+   *  HVP2 : PC2  --> Charge pump drive 2 (optional)
+   */
+
+  #define PGEN_USE_PORTD
+  #define PGEN_PIN 7
+  
+  #define HVEN_USE_PORTC
+  #define HVEN_PIN 3
+
+  /* HV pin group using TCA0 split timer */
+  /* using PWM pinnumber 0 ~ 5 (bad 6,7)*/
+  /* and AVR DB bad D0 (not output circuit) */
+  #define HVP_USE_OUTPUT
+  #define HVP_USE_PORTC
+  #define HVP1_PIN 1
+  #define HVP2_PIN 2
+
+  /* Sense RTS/DTR signal input intrrupt */
+  #ifdef ENABLE_MAKE_SIGNAL_OVER_RESET
+    #define MAKE_USE_PORTF
+    #define MAKE_PIN 6
+  #else
+    #define MAKE_USE_PORTD
+    #define MAKE_PIN 4
+  #endif
+
+  #define UPDI_USART_MODULE USART1
+  #define UPDI_USART_PORTMUX (PORTMUX_USART1_ALT2_gc)
+  #define UPDI_USART_PORT PORTD
+  #define UPDI_TDAT_PIN 6
+  // #define UPDI_TDIR_PIN
+  // #define UPDI_TDAT_PIN_PULLUP
+  // #define UPDI_TDIR_PIN_INVERT
+  #define UPDI_TRST_PIN 5
+
+  #define JTAG_USART_MODULE USART0
+  #define JTAG_USART_PORT PORTA
+  #define JTAG_JTTX_PIN 0
+  #define JTAG_JTRX_PIN 1
+
+  #ifdef DEBUG
+    #undef DEBUG
+  #endif /* DEBUG */
+
+  #define ABORT_USE_TIMERB1
+
+  #undef  MILLIS_USE_TIMERB2
+  #define MILLIS_USE_TIMERB2
+
+#elif defined(BOARD_AVRDX)
+
 /*-----------------------------*
  *                             *
  * ATmega4808, AVR128DB32, etc *
  *                             *
  *-----------------------------*/
-
-#if defined(BOARD_AVRDX)
 
   /***
    * Using Zinnia Duino (AVRDX) bords pinout

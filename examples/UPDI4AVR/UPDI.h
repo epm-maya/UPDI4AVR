@@ -120,17 +120,21 @@ namespace UPDI {
   };
 
   inline void tdir_push (void) {
+    #if defined(UPDI_TDIR_PIN)
     #if defined(UPDI_TDIR_PIN_INVERT)
     PIN_CTRL(UPDI_USART_PORT,UPDI_TDIR_PIN) &= ~(PORT_INVEN_bm);
     #else
     PIN_CTRL(UPDI_USART_PORT,UPDI_TDIR_PIN) |= PORT_INVEN_bm;
     #endif
+    #endif
   }
   inline void tdir_pull (void) {
+    #if defined(UPDI_TDIR_PIN)
     #if defined(UPDI_TDIR_PIN_INVERT)
     PIN_CTRL(UPDI_USART_PORT,UPDI_TDIR_PIN) |= PORT_INVEN_bm;
     #else
     PIN_CTRL(UPDI_USART_PORT,UPDI_TDIR_PIN) &= ~(PORT_INVEN_bm);
+    #endif
     #endif
   }
 
