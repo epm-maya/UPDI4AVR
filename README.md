@@ -1,4 +1,4 @@
-# UPDI4AVR (Rev.1)
+# UPDI4AVR Software
 
 UPDI (Unified Program and Debug Interface) host firmware over serial\
 For AVR DA/DB, megaAVR-0, tinyAVR-2 series from using avrdude, Arduino IDE\
@@ -7,6 +7,15 @@ For AVR DA/DB, megaAVR-0, tinyAVR-2 series from using avrdude, Arduino IDE\
 > UPDI対応AVR系列のためのシリアル通信ホストファームウェア\
 > AVR Dx, megaAVR, tinyAVR系列を対象に avrdude と Arduino IDEで応用可能\
 > /// 高電圧プログラミングによる FUSE 書換対応（要ハードウェア支援） ///
+
+`UPDI4AVR`プロダクトには以下の三種類があるが、このブランチはその最初のものである。
+
+- UPDI対応Arduino互換機で動作する汎用ソフトウェアとしての __UPDI4AVR Software__
+- 専用HV制御回路を含むオープンソースハードウェアとして設計された [__UPDI4AVR Programmer__](https://askn37.github.io/product/UPDI4AVR/)
+- その専用ハードウェア用に作成された [__UPDI4AVR Firmware__](https://github.com/askn37/multix-zinnia-updi4avr-firmware-builder/)
+
+このブランチの2023/03現在の活動は鈍い。
+AVR_EA対応を含む最新の更新は [__UPDI4AVR Firmware__](https://github.com/askn37/multix-zinnia-updi4avr-firmware-builder/) が先行している。
 
 ## 特徴
 
@@ -41,7 +50,7 @@ For AVR DA/DB, megaAVR-0, tinyAVR-2 series from using avrdude, Arduino IDE\
 
 そうでなければ次のようにする。
 
-1. .ZIPアーカイブをダウンロードする。[Click here](https://github.com/askn37/UPDI4AVR/archive/master.zip)
+1. .ZIPアーカイブをダウンロードする。[Click here](https://github.com/askn37/UPDI4AVR-Software/archive/master.zip)
 1. ライブラリマネージャで読み込む\
   `スケッチ` -> `ライブラリをインクルード` -> `.ZIP形式のライブラリをインストール...`
 1. ツールメニューのボード選択で、UPDIホストにする 適切なターゲットを選ぶ（次節）
