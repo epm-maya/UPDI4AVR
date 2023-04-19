@@ -33,6 +33,12 @@ arduino-cli compile ^
  --output-dir build-cli/ATtiny1624 UPDI4AVR
 @if errorlevel 1 goto :quit
 
+@rem ATtiny3226
+arduino-cli compile ^
+ -b "MultiX-Zinnia:megaAVR:tinyAVR012_noloader:01_variant=11" ^
+ --output-dir build-cli/ATtiny3226 UPDI4AVR
+@if errorlevel 1 goto :quit
+
 :done
 @echo ===
 @echo OK!
