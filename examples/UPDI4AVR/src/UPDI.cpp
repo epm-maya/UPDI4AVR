@@ -2,10 +2,10 @@
  * @file UPDI.cpp
  * @author askn (K.Sato) multix.jp
  * @brief
- * @version 0.1
- * @date 2022-12-12
+ * @version 0.2
+ * @date 2023-04-14
  *
- * @copyright Copyright (c) 2022
+ * @copyright Copyright (c) 2023
  *
  */
 #include <setjmp.h>
@@ -253,6 +253,7 @@ bool UPDI::read_parameter (void) {
     DBG::print("(SIB)", false);
     #endif
 
+    if (!UPDI::set_cs_ctra(UPDI::UPDI_SET_GTVAL_2)) break;
     if (!UPDI::SEND(UPDI::UPDI_SYNCH)) break;
     if (!UPDI::SEND(UPDI::UPDI_SIB_128)) break;
     p = &updi_sib[0];
@@ -262,11 +263,11 @@ bool UPDI::read_parameter (void) {
     /* UPDI connection success */
 
     UPDI::set_control(UPDI::UPDI_ACTIVE);
-    UPDI::NVMPROGVER = (updi_sib[10] == '2') ? 2 : 1;
+    UPDI::NVMPROGVER = updi_sib[10];
     #ifdef DEBUG_USE_USART
     DBG::print("[SIB]"); DBG::write(&updi_sib[0], 8, false);
     DBG::print("[NVM]"); DBG::write(&updi_sib[8], 8, false);
-    DBG::print(" PV=", false); DBG::write('0' + UPDI::NVMPROGVER);
+    DBG::print(" PV=", false); DBG::write(UPDI::NVMPROGVER);
     #endif
     return true;
   }
